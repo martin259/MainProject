@@ -1,0 +1,324 @@
+code = []
+ct = 0
+row = ""
+div_row_lis=[]
+div_lis=[]
+div_lis_dict={}
+def head():
+        a="""
+    <html>
+   <head>
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   </head>
+    <body>
+
+    <div style="background: linear-gradient(90deg, #C7C5F4, #776BCC);;"class="container">
+    <div class="row">
+        """
+        code.append(a)
+head()
+for i in sorted_elem_topwise:
+   
+#     print(i[0])
+    for j in elem_coord:
+        for x in j:
+            if x == i[0]:
+                cord = j[x].split(',')
+#                 print(cord)
+                t=int(cord[0])
+                l=int(cord[1])
+                r=int(cord[2])
+                b=int(cord[3])
+                w = r - l
+                h = b - t
+                meas ={'t':t,'l':l,'r':r,'b':b,'w':w,'h':h}
+                print(meas)
+
+               
+#                 print(j[x])
+#                 print("wid: "+ str(w))
+#                 print(w)
+                if (w < 83):
+                    s = 1
+                elif (w > 83 and w < 166):
+                    s = 2
+                elif (w >166 and w < 249):
+                    s = 3
+                elif (w >248 and w < 332):
+                    s = 4
+                elif (w >332 and w < 415):
+                    s = 5
+                elif (w >415 and w < 498):
+                    s = 6
+                elif (w >498 and w < 581):
+                    s = 7
+                elif (w >581 and w < 664):
+                    s = 8
+                elif (w >664 and w < 747):
+                    s = 9
+                elif (w >747 and w < 830):
+                    s = 10
+                elif (w >830 and w < 913):
+                    s = 11
+                elif (w >913):
+                    s = 12
+#                 if (w < 69):
+#                     s = 1
+#                 elif (w >= 70 and w <= 139):
+#                     s = 2
+#                 elif (w >140 and w <= 209):
+#                     s = 3
+#                 elif (w >210 and w <= 279):
+#                     s = 4
+#                 elif (w >280 and w <= 349):
+#                     s = 5
+#                 elif (w >350 and w <= 419):
+#                     s = 6
+#                 elif (w >420 and w <= 489):
+#                     s = 7
+#                 elif (w >490 and w <= 559):
+#                     s = 8
+#                 elif (w >560 and w <= 629):
+#                     s = 9
+#                 elif (w >630 and w <= 699):
+#                     s = 10
+#                 elif (w >700 and w <= 769):
+#                     s = 11
+#                 elif (w >770):
+#                     s = 12
+   
+#                 if (w < 49):
+#                     s = 1
+#                 elif (w >= 49 and w <= 100):
+#                     s = 2
+#                 elif (w >100 and w <= 150):
+#                     s = 3
+#                 elif (w >150 and w <= 200):
+#                     s = 4
+#                 elif (w >200 and w <= 250):
+#                     s = 5
+#                 elif (w >250 and w <= 300):
+#                     s = 6
+#                 elif (w >300 and w <= 350):
+#                     s = 7
+#                 elif (w >350 and w <= 400):
+#                     s = 8
+#                 elif (w >450 and w <= 500):
+#                     s = 9
+#                 elif (w >500 and w <= 550):
+#                     s = 10
+#                 elif (w >550 and w <= 600):
+#                     s = 11
+#                 elif (w >650):
+#                     s = 12
+
+                var = ''.join([k for k in i[0] if not k.isdigit()])
+#                 print(s)
+                print(i[0])
+   
+               
+                if(var=='button'):
+                    def button():
+                        bt="""{0}
+                        <div  class="col-md-{1}">
+                        <button style="background: transparent;color: #FFF;background: rgba(108, 88, 179, 0.75);border-radius: 40px;border: 2px solid rgba(58, 133, 191, 0.75);"type="button" class="btn btn-primary btn-rounded">Button</button>
+                        </div>
+                        """.format(row,s)
+                        code.append(bt)
+                        div_lis.append(bt+"$"+str(l)+","+str(r))
+                        div_lis_dict[(l,r)] = bt
+                    button()
+                if(var == 'heading'):
+                    def heading():
+                        hd ="""
+                        <div  class="container">
+                          <h1>THE HEADING</h1>
+                          <hr style="height: 4px;background: #228f3f;"
+ 
+                        </div>
+                        """
+                        code.append(hd)
+                        div_lis.append(hd+"$"+str(l)+","+str(r))
+                        div_lis_dict[(l,r)] = hd
+                    heading()
+                if(var=='checkbx'):
+                    def checkbox():
+                        cb="""{0}
+                        <div class="col-md-{1}">
+                        <div class="checkbox checkbox-primary">
+                          <label><input type="checkbox" value="">Option</label>
+                        </div>
+                        </div>
+
+                        """.format(row,s)
+                        code.append(cb)
+                        div_lis.append(cb+"$"+str(l)+","+str(r))
+                        div_lis_dict[(l,r)] = cb
+                    checkbox()
+                if(var=='dropdown'):
+
+                    def dropdn():
+                        dd="""
+                        {0}
+                        <div class="col-md-{1}">
+                          <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
+                            <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                              <li><a href="#">demo</a></li>
+                              <li><a href="#">demo</a></li>
+                              <li><a href="#">dem</a></li>
+                            </ul>
+                          </div>
+                          </div>
+
+                        """.format(row,s-1)
+                        code.append(dd)
+                        div_lis.append(dd+"$"+str(l)+","+str(r))
+                        div_lis_dict[(l,r)] = dd
+                    dropdn()
+                if(var=='hr'):
+
+                    def hrl():
+                        hr = """
+                        {0}
+                        <div class="col-md-{1}" style="display:block;  border-width: 1px;">
+                        <hr style="height: 4px;background: black;" >
+                        </div>
+                        """.format(row,12)
+#                         hr="""
+#                         {0}
+#                         <div style="position: absolute; left: {1}px; top: {2}px;" class="col-md-{3}">
+#                         <hr>
+#                         </div>
+#                         """.format(row,l,t,s)
+                        code.append(hr)
+                        div_lis.append(hr+"$"+str(l)+","+str(r))
+                        div_lis_dict[(l,r)] = hr
+                    hrl()
+                if(var=='image'):
+                    def image():
+                        path = r'C:\Users\ASUS\Pix2Code2.0\Acad_project\placeholder_images.png'
+                        img="""
+                        {0}
+                        <div  class="col-md-{1}">
+                        <img style="" src="{4}" alt="Sorry"  height="{2}" width="{3}">
+                        </div>
+                        """.format(row,s,h,w,path)
+                        code.append(img)
+                        div_lis.append(img+"$"+str(l)+","+str(r))
+                        div_lis_dict[(l,r)] = img
+                    image()
+                if(var=='label'):
+#                     s =s-1
+
+                    def label():
+                        labtxt="ph_"
+#                         if w>380:
+#                             labtxt = "A mote of dust suspended in a sunbeam finite but unbounded network of wormholes preserve and cherish that pale blue dot"
+#                         else:
+#                             labtxt="placeholder_label"
+                        lb="""
+                        {0}
+                        <div class="col-md-{1}">
+                        <h4 >{2} </h4>
+                        </div>
+                        """.format(row,s,labtxt+str(i[0]))
+                        code.append(lb)
+                        div_lis.append(lb+"$"+str(l)+","+str(r))
+                        div_lis_dict[(l,r)] = lb
+#                         print(div_lis)
+                    label()
+                if(var=='text'):
+
+                    def paragraph():
+                        pg="""
+                        {0}
+                        <div  class="col-md-{1}">
+                        <p >
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
+                        </div>
+
+                        """.format(row,s)
+                        code.append(pg)
+                        div_lis.append(pg+"$"+str(l)+","+str(r))
+                        div_lis_dict[(l,r)] = pg
+                    paragraph()
+                if(var=='radiobtn'):
+
+                    def radiobox():
+                        rb="""
+                        {0}
+                        <div class="col-md-{1}">
+                        <div class="radio">
+                          <label><input type="radio" name="optradio" checked>Option</label>
+                        </div>
+                        </div>
+                         """.format(row,s)
+                        code.append(rb)
+                        div_lis.append(rb+"$"+str(l)+","+str(r))
+                        div_lis_dict[(l,r)] = rb
+                    radiobox()
+                if(var=='textbox'):
+                    def textbox():
+                        tb="""
+                        {0}
+                        <div  class="col-md-{1}">
+                        <textarea style="height:{2}px;width:{3}px" ></textarea>
+                        </div>
+
+                        """.format(row,s-1,h,w)
+                        code.append(tb)
+                        div_lis.append(tb+"$"+str(l)+","+str(r))
+                        div_lis_dict[(l,r)] = tb
+#                         print(tb)
+                    textbox()
+               
+               
+                if (ct<len(sorted_elem_topwise)-1):
+           
+                    pp = sorted_elem_topwise[ct+1]
+                    for j in elem_coord:
+                        for x in j:
+                            if x == pp[0]:
+                                t1,_,_,b1 = j[x].split(",")
+                                t1 = int(t1)
+                                b1 = int(b1)
+
+                                dif = b1 - t1
+
+                                if ((t1 >= (t)) and (t1 <= (b-10))) :
+                                    row =""
+                                   
+                                else :
+#                                     print(div_lis)
+#                                     div_row_lis.append(div_lis_dict)
+                                    div_lis_dict = {}
+                                    div_row_lis.append(div_lis)
+                                    div_lis=[]
+                                   
+#                                     print(div_row_lis)
+                                   
+#                                     print("CLOSING")
+                                    row ="""
+                                    </div>
+                                    <div class="row">"""
+                                   
+
+#                 print(div_lis)
+#                 print("---------------------------------------------------------------------------------------------------------")
+                ct+=1
+div_row_lis.append(div_lis)
+# div_row_lis.append(div_lis_dict)
+
+def las():
+    fin="""</div>
+            </div>
+        </body>
+        </html>"""
+    code.append(fin)
+las()
+# div_row_lis[0]
